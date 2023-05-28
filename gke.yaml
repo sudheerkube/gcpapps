@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gcp-deploy
+  namespace: gcrapps
+  labels:
+    app: gcr-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gcr-app
+  template:
+    metadata:
+      labels:
+        app: gcr-app
+    spec:
+      containers:
+      - name: gcp-container
+        image: gcr.io/river-data-388020/gcrapps:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: port 
+          value: "5000"

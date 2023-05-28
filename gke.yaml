@@ -23,3 +23,19 @@ spec:
         env:
         - name: port 
           value: "5000"
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "gcp-svc"
+  namespace: "gcrapps"
+  labels:
+    app.kubernetes.io/managed-by: "gcp-cloud-build-deploy"
+spec:
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 5000
+  selector:
+    app: "gcr-app"
+  type: "LoadBalancer"
